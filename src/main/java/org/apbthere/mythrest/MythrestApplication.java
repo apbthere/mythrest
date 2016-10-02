@@ -41,16 +41,28 @@ public class MythrestApplication {
 			try (OutputStream outputStream = sSocket.getOutputStream()) {
 				PrintWriter sOutputStream = new PrintWriter(outputStream);
 
-				logger.info("Sending command [{}]", command);
-				sOutputStream.println("jump livetv");
-				sOutputStream.flush();
-				sOutputStream.println(command);
-				sOutputStream.flush();
-				
 				try (InputStream inputStream = sSocket.getInputStream()) {
 					BufferedReader sInputStream = new BufferedReader(new InputStreamReader(inputStream));
 					reply = sInputStream.readLine();
+					logger.info("Server: {}", reply);
+					reply = sInputStream.readLine();
+					logger.info("Server: {}", reply);
+					reply = sInputStream.readLine();
+					logger.info("Server: {}", reply);
+					
+					logger.info("Sending command [{}]", command);
+					sOutputStream.println("jump livetv");
+					sOutputStream.flush();
+					
+					reply = sInputStream.readLine();
+					logger.info("Server: {}", reply);
 
+					sOutputStream.println(command);
+					sOutputStream.flush();
+					
+					reply = sInputStream.readLine();
+					logger.info("Server: {}", reply);
+					
 					sInputStream.close();
 					inputStream.close();
 				}
