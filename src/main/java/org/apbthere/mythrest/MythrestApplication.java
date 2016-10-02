@@ -1,14 +1,11 @@
 package org.apbthere.mythrest;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -45,6 +42,8 @@ public class MythrestApplication {
 				PrintWriter sOutputStream = new PrintWriter(outputStream);
 
 				logger.info("Sending command [{}]", command);
+				sOutputStream.println("jump livetv");
+				sOutputStream.flush();
 				sOutputStream.println(command);
 				sOutputStream.flush();
 				
